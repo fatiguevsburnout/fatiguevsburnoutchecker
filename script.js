@@ -1,18 +1,23 @@
 function checkResult() {
-    let q1 = document.getElementById("q1").value;
-    let q2 = document.getElementById("q2").value;
-    let q3 = document.getElementById("q3").value;
+    let total = 0;
+
+    for (let i = 1; i <= 8; i++) {
+        total += parseInt(document.getElementById("q" + i).value);
+    }
 
     let result = "";
 
-    if (q1 === "low" && q3 === "short") {
-        result = "Physical fatigue detected. Recommendation: Rest.";
+    if (total <= 2) {
+        result = "Low fatigue. Maintain healthy habits.";
     } 
-    else if (q2 === "stress" && q3 === "long") {
-        result = "Possible burnout. Recommendation: Stress management.";
+    else if (total <= 5) {
+        result = "Moderate fatigue. Recommendation: Rest and lifestyle adjustment.";
+    } 
+    else if (total <= 7) {
+        result = "High stress or fatigue. Recommendation: Stress management.";
     } 
     else {
-        result = "Consider consulting a clinic.";
+        result = "Possible burnout. Recommendation: Seek clinical consultation.";
     }
 
     document.getElementById("result").innerText = result;
