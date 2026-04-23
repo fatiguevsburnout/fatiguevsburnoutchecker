@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Results</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container triage-box">
+    <h1>Triage Result</h1>
+
+    <div id="badge" class="badge"></div>
+
+    <h2 id="level"></h2>
+    <p id="message"></p>
+
+    <button onclick="restart()">Start Again</button>
+</div>
+
+<script>
+let level = localStorage.getItem("level");
+let message = localStorage.getItem("message");
+let color = localStorage.getItem("color");
+
+document.getElementById("level").innerText = level;
+document.getElementById("message").innerText = message;
+
+let badge = document.getElementById("badge");
+badge.style.background = color;
+badge.innerText = level;
+
+function restart() {
+    localStorage.clear();
+    window.location.href = "index.html";
+}
+</script>
+
+</body>
+</html>
