@@ -36,13 +36,14 @@ function checkResult() {
     }
 
     // ✅ SEND TO SHEETDB (SAFE)
-    fetch("https://sheetdb.io/api/v1/lpw80svq8kkxr", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            data: {
+fetch("https://sheetdb.io/api/v1/lpw80svq8kkxr", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+        data: [
+            {
                 q1: answers[0],
                 q2: answers[1],
                 q3: answers[2],
@@ -53,9 +54,11 @@ function checkResult() {
                 q8: answers[7],
                 result: level
             }
-        })
+        ]
     })
-    .catch(error => console.log("SheetDB error:", error)); // 👈 prevents crash
+})
+.then(res => console.log("Sent to sheet"))
+.catch(err => console.log("Error:", err));
 
     // ✅ SAVE FOR RESULTS PAGE
     localStorage.setItem("level", level);
