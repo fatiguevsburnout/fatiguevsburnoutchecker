@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fatigue vs Burnout</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Fatigue vs Burnout Assessment</h1>
+    <p style="color: gray; font-size: 14px;">
+    Quick self-check tool. Not a medical diagnosis.
+    </p>
+
+    <form>
+        <p>1. How do you feel physically?</p>
+        <select id="q1">
+            <option value="low">Low energy</option>
+            <option value="normal">Normal</option>
+        </select>
+
+        <p>2. How do you feel mentally?</p>
+        <select id="q2">
+            <option value="stress">Stressed</option>
+            <option value="ok">Okay</option>
+        </select>
+
+        <p>3. How long have you felt this?</p>
+        <select id="q3">
+            <option value="short">Short-term</option>
+            <option value="long">Long-term</option>
+        </select>
+
+        <button type="button" onclick="checkResult()">Check Result</button>
+    </form>
+
+    <h2 id="result"></h2>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
