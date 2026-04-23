@@ -36,7 +36,7 @@ function checkResult() {
     }
 
     // ✅ SEND TO SHEETDB (SAFE)
-fetch("https://sheetdb.io/api/v1/lpw80svq8kkxr", {
+fetch("https://sheetdb.io/api/v1/teu74373s8os0", {
     method: "POST",
     headers: {
         "Content-Type": "application/json"
