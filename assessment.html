@@ -1,65 +1,55 @@
-<h2>Assessment</h2>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Assessment</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-<p><b>Disclaimer:</b> This is not a medical diagnosis.</p>
+<div class="container">
+    <h1>Assessment</h1>
 
-<form>
+    <p class="disclaimer">
+    This is a self-check tool and not a medical diagnosis.
+    </p>
 
-<h3>Physical Fatigue</h3>
+    <form>
 
-<p>Sleeping less than 6 hours for at least 3 nights?</p>
-<select id="q1">
-    <option value="0">No</option>
-    <option value="1">Yes</option>
-</select>
+    <h3>Physical Fatigue</h3>
 
-<p>Still tired after 8 hours of sleep?</p>
-<select id="q2">
-    <option value="0">No</option>
-    <option value="1">Yes</option>
-</select>
+    <p>Sleeping less than 6 hours for 3 nights?</p>
+    <select id="q1"><option value="0">No</option><option value="1">Yes</option></select>
 
-<h3>Stress & Burnout</h3>
+    <p>Still tired after 8 hours of sleep?</p>
+    <select id="q2"><option value="0">No</option><option value="1">Yes</option></select>
 
-<p>Felt overwhelmed in the past month?</p>
-<select id="q3">
-    <option value="0">No</option>
-    <option value="1">Yes</option>
-</select>
+    <h3>Stress & Burnout</h3>
 
-<p>Difficulty concentrating most of the time?</p>
-<select id="q4">
-    <option value="0">No</option>
-    <option value="1">Yes</option>
-</select>
+    <p>Felt overwhelmed in the past month?</p>
+    <select id="q3"><option value="0">No</option><option value="1">Yes</option></select>
 
-<p>Emotionally drained or unmotivated?</p>
-<select id="q5">
-    <option value="0">No</option>
-    <option value="1">Yes</option>
-</select>
+    <p>Difficulty concentrating most of the time?</p>
+    <select id="q4"><option value="0">No</option><option value="1">Yes</option></select>
 
-<h3>Functional Impact</h3>
+    <p>Emotionally drained or unmotivated?</p>
+    <select id="q5"><option value="0">No</option><option value="1">Yes</option></select>
 
-<p>Too tired to complete tasks?</p>
-<select id="q6">
-    <option value="0">No</option>
-    <option value="1">Yes</option>
-</select>
+    <h3>Functional Impact</h3>
 
-<p>Difficulty concentrating for 30 mins?</p>
-<select id="q7">
-    <option value="0">No</option>
-    <option value="1">Yes</option>
-</select>
+    <p>Too tired to complete tasks?</p>
+    <select id="q6"><option value="0">No</option><option value="1">Yes</option></select>
 
-<p>Still drained even after sleep?</p>
-<select id="q8">
-    <option value="0">No</option>
-    <option value="1">Yes</option>
-</select>
+    <p>Difficulty concentrating for 30 mins?</p>
+    <select id="q7"><option value="0">No</option><option value="1">Yes</option></select>
 
-<button type="button" onclick="checkResult()">Submit</button>
+    <p>Still drained even after sleep?</p>
+    <select id="q8"><option value="0">No</option><option value="1">Yes</option></select>
 
-</form>
+    <button type="button" onclick="checkResult()">Submit</button>
 
-<h2 id="result"></h2>
+    </form>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

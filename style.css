@@ -7,11 +7,11 @@ body {
 .container {
     background: white;
     padding: 30px;
-    margin: 60px auto;
+    margin: 50px auto;
     width: 90%;
     max-width: 420px;
     border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
     text-align: center;
 }
 
@@ -29,8 +29,21 @@ h1 {
     color: #555;
 }
 
+.disclaimer {
+    font-size: 13px;
+    color: gray;
+}
+
+select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
 button {
-    margin-top: 25px;
+    margin-top: 20px;
     padding: 14px;
     width: 100%;
     background: #1f3c88;
@@ -43,4 +56,19 @@ button {
 
 button:hover {
     background: #162e66;
+}
+
+/* TRIAGE RESULT DESIGN */
+
+.triage-box {
+    border-top: 8px solid #1f3c88;
+}
+
+.badge {
+    margin: 20px auto;
+    padding: 15px;
+    width: 80%;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
 }

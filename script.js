@@ -5,20 +5,34 @@ function checkResult() {
         total += parseInt(document.getElementById("q" + i).value);
     }
 
-    let result = "";
+    let level = "";
+    let message = "";
+    let color = "";
 
     if (total <= 2) {
-        result = "Low fatigue. Maintain healthy habits.";
+        level = "LOW RISK";
+        message = "You are functioning well. Maintain healthy habits.";
+        color = "green";
     } 
     else if (total <= 5) {
-        result = "Moderate fatigue. Recommendation: Rest and lifestyle adjustment.";
+        level = "MODERATE FATIGUE";
+        message = "You may need rest and lifestyle adjustment.";
+        color = "orange";
     } 
     else if (total <= 7) {
-        result = "High stress or fatigue. Recommendation: Stress management.";
+        level = "HIGH FATIGUE / STRESS";
+        message = "Stress management is recommended.";
+        color = "red";
     } 
     else {
-        result = "Possible burnout. Recommendation: Seek clinical consultation.";
+        level = "POSSIBLE BURNOUT";
+        message = "Seek professional or clinical consultation.";
+        color = "darkred";
     }
 
-    document.getElementById("result").innerText = result;
+    localStorage.setItem("level", level);
+    localStorage.setItem("message", message);
+    localStorage.setItem("color", color);
+
+    window.location.href = "results.html";
 }
