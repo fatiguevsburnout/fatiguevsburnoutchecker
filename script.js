@@ -86,7 +86,7 @@ function checkResult() {
         console.log("Success:", data);
 
         // GO TO RESULT PAGE
-        window.location.href = "result.html";
+        window.location.href = "results.html";
 
     })
 
@@ -95,7 +95,7 @@ function checkResult() {
         console.error("Error:", error);
 
         // STILL GO TO RESULT PAGE EVEN IF SHEETS FAILS
-        window.location.href = "result.html";
+        window.location.href = "results.html";
 
     });
 
