@@ -55,7 +55,7 @@ function checkResult() {
     localStorage.setItem("color", color);
 
     // SEND TO GOOGLE SHEETS
-    fetch("https://script.google.com/macros/s/AKfycbxHfhFXBFWqC8x0Uv2A6xMChCwS-ZBoe9Tx9kN6a23Zjpkjsg8avd1OeI1HiFTdzGvh/exec", {
+    fetch("https://script.google.com/macros/s/AKfycbyAz6llWYxu9jrd7RF8rISd7s4_7EJgwHOfSdkWN0lPWm4NDy1gAXqIwdJGgl5ghfZyAw/exec", {
 
         method: "POST",
 
