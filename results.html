@@ -1,39 +1,74 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Results</title>
+    <title>Triage Result</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="container triage-box">
+
     <h1>Triage Result</h1>
 
+    <!-- RESULT BADGE -->
     <div id="badge" class="badge"></div>
 
+    <!-- RESULT MESSAGE -->
     <p id="message"></p>
 
-    <button onclick="restart()">Start Again</button>
+    <!-- RESOURCE SECTION -->
+    <div class="resource-box" id="resourceBox">
+
+        <h3>Recommended Support Resource</h3>
+
+        <p>
+            Based on your responses, you may benefit from stress management,
+            healthy coping strategies, proper rest, and emotional support.
+        </p>
+
+        <a href="https://sabularsejournal.my.canva.site" target="_blank">
+            <button class="resource-btn">
+                View Stress Management Guide
+            </button>
+        </a>
+
+    </div>
+
+    <!-- RESTART BUTTON -->
+    <button onclick="restart()">
+        Start Again
+    </button>
+
 </div>
 
 <script>
+
 window.onload = function() {
+
     let level = localStorage.getItem("level");
     let message = localStorage.getItem("message");
     let color = localStorage.getItem("color");
 
     let badge = document.getElementById("badge");
 
+    // SHOW RESULT
     badge.innerText = level;
     badge.style.background = color;
 
     document.getElementById("message").innerText = message;
+
+    // HIDE RESOURCE IF LOW RISK
+    if (level === "LOW RISK") {
+        document.getElementById("resourceBox").style.display = "none";
+    }
 };
 
+// RESTART
 function restart() {
     localStorage.clear();
     window.location.href = "index.html";
 }
+
 </script>
 
 </body>
