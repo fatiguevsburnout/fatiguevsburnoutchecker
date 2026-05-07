@@ -1,81 +1,102 @@
-function doPost(e) {
+function checkResult() {
 
-  // GET CURRENT ACTIVE SHEET
-  var sheet = SpreadsheetApp
-    .getActiveSpreadsheet()
-    .getActiveSheet();
+    let answers = [];
+    let total = 0;
 
-  // READ JSON DATA FROM WEBSITE
-  var data = JSON.parse(e.postData.contents);
+    // GET ANSWERS
+    for (let i = 1; i <= 8; i++) {
 
-  // ADD NEW ROW TO SHEET
-  sheet.appendRow([
+        let val = document.getElementById("q" + i).value;
 
-    new Date(),
+        val = val ? parseInt(val) : 0;
 
-    data.q1,
-    data.q2,
-    data.q3,
-    data.q4,
-    data.q5,
-    data.q6,
-    data.q7,
-    data.q8,
+        answers.push(val);
 
-    data.result
+        total += val;
+    }
 
-  ]);
+    // RESULT VARIABLES
+    let level = "";
+    let message = "";
+    let color = "";
 
-  // RETURN SUCCESS RESPONSE
-  return ContentService
-    .createTextOutput(
-      JSON.stringify({
-        status: "success"
-      })
-    )
-    .setMimeType(ContentService.MimeType.JSON);
-}
+    // TRIAGE ALGORITHM
+    if (total <= 2) {
 
-fetch("https://script.google.com/macros/s/AKfycbxHfhFXBFWqC8x0Uv2A6xMChCwS-ZBoe9Tx9kN6a23Zjpkjsg8avd1OeI1HiFTdzGvh/exec", {
+        level = "LOW RISK";
+        message = "You are functioning well. Continue maintaining healthy sleep, stress management, and self-care habits.";
+        color = "green";
 
-    method: "POST",
+    } 
+    else if (total <= 5) {
 
-    headers: {
-        "Content-Type": "application/json"
-    },
+        level = "MODERATE FATIGUE";
+        message = "You may be experiencing physical fatigue. Proper rest, hydration, nutrition, and stress management are recommended.";
+        color = "orange";
 
-    body: JSON.stringify({
+    } 
+    else if (total <= 7) {
 
-        q1: answers[0],
-        q2: answers[1],
-        q3: answers[2],
-        q4: answers[3],
-        q5: answers[4],
-        q6: answers[5],
-        q7: answers[6],
-        q8: answers[7],
+        level = "HIGH FATIGUE / STRESS";
+        message = "Your responses suggest elevated stress or fatigue levels. Consider stress management strategies and reducing workload when possible.";
+        color = "red";
 
-        result: level
+    } 
+    else {
+
+        level = "POSSIBLE BURNOUT";
+        message = "Your responses may indicate burnout or prolonged exhaustion. Seeking guidance from a healthcare professional or clinic consultation is recommended.";
+        color = "darkred";
+    }
+
+    // SAVE RESULT FOR RESULTS PAGE
+    localStorage.setItem("level", level);
+    localStorage.setItem("message", message);
+    localStorage.setItem("color", color);
+
+    // SEND TO GOOGLE SHEETS
+    fetch("https://script.google.com/macros/s/AKfycbxHfhFXBFWqC8x0Uv2A6xMChCwS-ZBoe9Tx9kN6a23Zjpkjsg8avd1OeI1HiFTdzGvh/exec", {
+
+        method: "POST",
+
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+
+            q1: answers[0],
+            q2: answers[1],
+            q3: answers[2],
+            q4: answers[3],
+            q5: answers[4],
+            q6: answers[5],
+            q7: answers[6],
+            q8: answers[7],
+            result: level
+
+        })
 
     })
 
-})
-.then(response => response.text())
-.then(data => {
+    .then(response => response.text())
+    .then(data => {
 
-    console.log("Saved to Sheets");
+        console.log("Saved to Sheets");
 
-    setTimeout(() => {
+    })
 
+    .catch(error => {
+
+        console.error(error);
+
+    })
+
+    .finally(() => {
+
+        // ALWAYS GO TO RESULTS PAGE
         window.location.href = "results.html";
 
-    }, 1000);
+    });
 
-})
-.catch(error => {
-
-    console.error(error);
-
-    alert("Failed to save response.");
-
-});
+}
