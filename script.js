@@ -1,61 +1,42 @@
-function checkResult() {
+function doPost(e) {
 
-    let answers = [];
-    let total = 0;
+  // GET CURRENT ACTIVE SHEET
+  var sheet = SpreadsheetApp
+    .getActiveSpreadsheet()
+    .getActiveSheet();
 
-    // GET ANSWERS
-    for (let i = 1; i <= 8; i++) {
+  // READ JSON DATA FROM WEBSITE
+  var data = JSON.parse(e.postData.contents);
 
-        let val = document.getElementById("q" + i).value;
+  // ADD NEW ROW TO SHEET
+  sheet.appendRow([
 
-        val = val ? parseInt(val) : 0;
+    new Date(),
 
-        answers.push(val);
+    data.q1,
+    data.q2,
+    data.q3,
+    data.q4,
+    data.q5,
+    data.q6,
+    data.q7,
+    data.q8,
 
-        total += val;
-    }
+    data.result
 
-    // RESULT VARIABLES
-    let level = "";
-    let message = "";
-    let color = "";
+  ]);
 
-    // TRIAGE ALGORITHM
-    if (total <= 2) {
+  // RETURN SUCCESS RESPONSE
+  return ContentService
+    .createTextOutput(
+      JSON.stringify({
+        status: "success"
+      })
+    )
+    .setMimeType(ContentService.MimeType.JSON);
+}
 
-        level = "LOW RISK";
-        message = "You are functioning well. Continue maintaining healthy sleep, stress management, and self-care habits.";
-        color = "green";
-
-    } 
-    else if (total <= 5) {
-
-        level = "MODERATE FATIGUE";
-        message = "You may be experiencing physical fatigue. Proper rest, hydration, nutrition, and stress management are recommended.";
-        color = "orange";
-
-    } 
-    else if (total <= 7) {
-
-        level = "HIGH FATIGUE / STRESS";
-        message = "Your responses suggest elevated stress or fatigue levels. Consider stress management strategies and reducing workload when possible.";
-        color = "red";
-
-    } 
-    else {
-
-        level = "POSSIBLE BURNOUT";
-        message = "Your responses may indicate burnout or prolonged exhaustion. Seeking guidance from a healthcare professional or clinic consultation is recommended.";
-        color = "darkred";
-    }
-
-    // SAVE DATA FOR RESULTS PAGE
-    localStorage.setItem("level", level);
-    localStorage.setItem("message", message);
-    localStorage.setItem("color", color);
-
-    // SEND TO GOOGLE SHEETS
-    fetch("https://script.google.com/macros/s/AKfycbxHfhFXBFWqC8x0Uv2A6xMChCwS-ZBoe9Tx9kN6a23Zjpkjsg8avd1OeI1HiFTdzGvh/exec", {
+fetch("https://script.google.com/macros/s/AKfycbxHfhFXBFWqC8x0Uv2A6xMChCwS-ZBoe9Tx9kN6a23Zjpkjsg8avd1OeI1HiFTdzGvh/exec", {
 
     method: "POST",
 
@@ -73,6 +54,7 @@ function checkResult() {
         q6: answers[5],
         q7: answers[6],
         q8: answers[7],
+
         result: level
 
     })
@@ -83,7 +65,6 @@ function checkResult() {
 
     console.log("Saved to Sheets");
 
-    // WAIT A LITTLE BEFORE REDIRECT
     setTimeout(() => {
 
         window.location.href = "results.html";
@@ -97,5 +78,4 @@ function checkResult() {
 
     alert("Failed to save response.");
 
-})
-}
+});
