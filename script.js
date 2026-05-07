@@ -55,48 +55,46 @@ function checkResult() {
     localStorage.setItem("color", color);
 
     // SEND TO GOOGLE SHEETS
-    fetch("PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEBAPP_URL_HERE", {
+    fetch("https://script.google.com/macros/library/d/1WiRh__43a9mnk5clU8X270EoD2FLZrD70Kg-TLp8kXwzIlnKvbO25nd2/1", {
 
-        method: "POST",
+    method: "POST",
 
-        headers: {
-            "Content-Type": "application/json"
-        },
+    headers: {
+        "Content-Type": "application/json"
+    },
 
-        body: JSON.stringify({
+    body: JSON.stringify({
 
-            q1: answers[0],
-            q2: answers[1],
-            q3: answers[2],
-            q4: answers[3],
-            q5: answers[4],
-            q6: answers[5],
-            q7: answers[6],
-            q8: answers[7],
-            result: level
-
-        })
+        q1: answers[0],
+        q2: answers[1],
+        q3: answers[2],
+        q4: answers[3],
+        q5: answers[4],
+        q6: answers[5],
+        q7: answers[6],
+        q8: answers[7],
+        result: level
 
     })
 
-    .then(response => response.text())
+})
+.then(response => response.text())
+.then(data => {
 
-    .then(data => {
+    console.log("Saved to Sheets");
 
-        console.log("Success:", data);
+    // WAIT A LITTLE BEFORE REDIRECT
+    setTimeout(() => {
 
-        // ✅ REDIRECT TO CORRECT PAGE
         window.location.href = "results.html";
 
-    })
+    }, 1000);
 
-    .catch(error => {
+})
+.catch(error => {
 
-        console.error("Error:", error);
+    console.error(error);
 
-        // STILL REDIRECT EVEN IF ERROR
-        window.location.href = "results.html";
+    alert("Failed to save response.");
 
-    });
-
-}
+});
