@@ -49,13 +49,13 @@ function checkResult() {
         color = "darkred";
     }
 
-    // SAVE DATA FOR RESULT PAGE
+    // SAVE DATA FOR RESULTS PAGE
     localStorage.setItem("level", level);
     localStorage.setItem("message", message);
     localStorage.setItem("color", color);
 
-    // SEND DATA TO GOOGLE SHEETS
-    fetch("https://script.google.com/macros/s/AKfycbxHfhFXBFWqC8x0Uv2A6xMChCwS-ZBoe9Tx9kN6a23Zjpkjsg8avd1OeI1HiFTdzGvh/exec", {
+    // SEND TO GOOGLE SHEETS
+    fetch("PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEBAPP_URL_HERE", {
 
         method: "POST",
 
@@ -85,7 +85,7 @@ function checkResult() {
 
         console.log("Success:", data);
 
-        // GO TO RESULT PAGE
+        // ✅ REDIRECT TO CORRECT PAGE
         window.location.href = "results.html";
 
     })
@@ -94,7 +94,7 @@ function checkResult() {
 
         console.error("Error:", error);
 
-        // STILL GO TO RESULT PAGE EVEN IF SHEETS FAILS
+        // STILL REDIRECT EVEN IF ERROR
         window.location.href = "results.html";
 
     });
