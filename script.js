@@ -49,52 +49,42 @@ function checkResult() {
         color = "darkred";
     }
 
-    // SAVE RESULT FOR RESULTS PAGE
+    // SAVE RESULTS FOR RESULTS PAGE
     localStorage.setItem("level", level);
     localStorage.setItem("message", message);
     localStorage.setItem("color", color);
 
-    // SEND TO GOOGLE SHEETS
-    fetch("https://script.google.com/macros/s/AKfycbyAz6llWYxu9jrd7RF8rISd7s4_7EJgwHOfSdkWN0lPWm4NDy1gAXqIwdJGgl5ghfZyAw/exec", {
+    // GOOGLE FORM URL
+    const formURL = "https://docs.google.com/forms/d/e/1FAIpQLSeh4bxFJ02FL1Cr8aQRTZ30fmGXHT7JAzoQxVPRga14RT5v3g/formResponse";
+
+    // CREATE FORM DATA
+    const formData = new FormData();
+
+    // SEND ANSWERS
+    formData.append("entry.1609505913", answers[0]);
+    formData.append("entry.1585437042", answers[1]);
+    formData.append("entry.130621211", answers[2]);
+    formData.append("entry.286152385", answers[3]);
+    formData.append("entry.1823814258", answers[4]);
+    formData.append("entry.1706614793", answers[5]);
+    formData.append("entry.1879999563", answers[6]);
+    formData.append("entry.2127118600", answers[7]);
+
+    // SEND RESULT
+    formData.append("entry.185364177", level);
+
+    // SUBMIT TO GOOGLE FORM
+    fetch(formURL, {
 
         method: "POST",
-
-        headers: {
-            "Content-Type": "application/json"
-        },
-
-        body: JSON.stringify({
-
-            q1: answers[0],
-            q2: answers[1],
-            q3: answers[2],
-            q4: answers[3],
-            q5: answers[4],
-            q6: answers[5],
-            q7: answers[6],
-            q8: answers[7],
-            result: level
-
-        })
+        mode: "no-cors",
+        body: formData
 
     })
-
-    .then(response => response.text())
-    .then(data => {
-
-        console.log("Saved to Sheets");
-
-    })
-
-    .catch(error => {
-
-        console.error(error);
-
-    })
-
+    .catch(error => console.error(error))
     .finally(() => {
 
-        // ALWAYS GO TO RESULTS PAGE
+        // GO TO RESULTS PAGE
         window.location.href = "results.html";
 
     });
