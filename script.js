@@ -97,4 +97,5 @@ function checkResult() {
 
     alert("Failed to save response.");
 
-});
+})
+}
